@@ -1,0 +1,36 @@
+﻿{% extends "menu.html" %}
+{% block content %}
+<div class="container">
+    {%for r in rows %}
+    <div class="items">
+        <h1>Edit Item</h1>
+    </div>
+
+    <form id="edit-item" action="/Items/edit/{{r.0}}" method="POST">
+        <div class="form-row">
+            <div class="col mb-3">
+                <label for="validationDefault03">Item name</label>
+                <input type="text" name="item_name" class="form-control" id="validationDefault03" value="{{r[2]}}" required>
+            </div>
+
+            <div class="col mb-3">
+                <label for="validationDefault02">Price</label>
+                <input type="number" name="price" class="form-control" id="validationDefault02" value="{{r[1]}}" step=".01" required>
+            </div>
+            <div class="col mb-3">
+                <label for="validationDefault03">Quantity available</label>
+                <input type="number" name="quantity_available" class="form-control" id="validationDefault03" value="{{r[4]}}" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12 mb-3">
+                <label for="validationDefault04">Description</label>
+                <input type="text" name="description" class="form-control" id="validationDefault04" value="{{r[3]}}">
+            </div>
+        </div>
+    </form>
+    <button class="btn btn-success" type="submit" form="edit-item">Submit Changes</button>
+    <button class="btn btn-danger" onclick="window.location='/Items'">Cancel</button>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+﻿{% extends "menu.html" %}
+{% block content %}
+<script>
+    $(document).ready(function () {
+        $('#itemsTable').DataTable();
+    });
+</script>
+
+    <div class="container">
+        <div class="orderItems">
+            <h1>Items for Order #{{rows.0.0}}</h1>
+        </div>
+        <table id="itemsTable">
+            <thead>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in rows %}
+                <tr>
+                    <td>{{r[2]}}</td>
+                    <td>{{r[3]}}</td>
+                    <td>{{r[4]}}</td>
+                    <td><button class="rowBtn, btn btn-danger" type="submit" onclick="window.location='/Orders/edit/{{r.0}}/items/delete{{r.1}}'">Delete</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button class="btn btn-primary" onclick="window.location='/Orders'">Back to Orders</button>
+    </div>
+
+{% endblock %}

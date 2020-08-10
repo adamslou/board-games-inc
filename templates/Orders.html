@@ -1,0 +1,140 @@
+﻿{% extends "menu.html" %}
+{% block content %}
+<script>
+$(document).ready(function() {
+    $('#ordersTable').DataTable();
+} );
+</script>
+
+<div class="orders">
+    <h1>Order Management</h1>
+</div>
+<form id="orderForm" action="/Orders" method="POST">
+    <div class="form-row">
+        <div class="col">
+            <label for="custSelect">Customer</label>
+            <select class="form-control" name="cust_id" id="custSelect">
+                <option value="">Select customer</option>
+                {% for c in custDD %}
+                <option value="{{c.0}}">{{c.1}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+            <label for="empSelect">Employee</label>
+            <select class="form-control" name="emp_id" id="empSelect">
+                <option value="">Select employee</option>
+                {% for e in empDD %}
+                <option value="{{e.0}}">{{e.1}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+            <label for="dateInput">Date</label>
+            <input type="date" class="form-control" name="date" id="dateInput" placeholder="2020-02-10" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col">
+            <label for="creditCardNum">Credit card number</label>
+            <input type="number" class="form-control" name="credit_card_num" id="creditCardNum" placeholder="1111222233334444" maxlength="16" minlength="16" required>
+        </div>
+        <div class="col">
+            <label for="expDateInput">Expiration date</label>
+            <input type="date" class="form-control" name="exp_date" id="expDateInput" placeholder="2023-03-01" required>
+        </div>
+        <div class="col">
+            <label for="creditCardCode">Credit card code</label>
+            <input type="number" class="form-control" name="credit_card_code" id="creditCardCode" placeholder="123" maxlength="4" minlength="3" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="input-group">
+            <div class="col-md-10">
+                <label for="itemSelect">Items</label>
+                <select class="form-control" name="item_id_0" id="itemSelect" required>
+                    <option selected disabled hidden>Select item</option>
+                    {% for i in itemDD %}
+                    <option value="{{i.0}}">{{i.1}}, {{i.2}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label for="quantityInput">Quantity</label>
+                <input type="number" class="form-control" name="quantity_0" id="quantityInput" value="1" min="1" required>
+            </div>
+        </div>
+    </div>
+</form>
+<button class="btn btn-secondary mb-3" id="addItemBtn" type="submit" form="orderForm">Add item to order</button>
+<br>
+<button class="btn btn-success mb-3" type="submit" form="orderForm">Submit order</button>
+
+<table id="ordersTable" class="table table-bordered table-sm">
+    <thead>
+        <tr>
+            <th class="th-sm" scope="col">Order id</th>
+            <th class="th-sm" scope="col">Customer</th>
+            <th class="th-sm" scope="col">Employee</th>
+            <th class="th-sm" scope="col">Date</th>
+            <th class="th-sm" scope="col">Total</th>
+            <th class="th-sm" scope="col">Credit card number</th>
+            <th class="th-sm" scope="col">Expiration date</th>
+            <th class="th-sm" scope="col">Credit card code</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            <td>{{r.0}}</td>
+            <td>{{r[1]}}</td>
+            <td>{{r[2]}}</td>
+            <td>{{r[3]}}</td>
+            <td>{{r[4]}}</td>
+            <td>{{r[5]}}</td>
+            <td>{{r[6]}}</td>
+            <td>{{r[7]}}</td>
+            <td class="rowBtn"><button class="btn btn-secondary" id="items-button" type="submit" onclick="window.location='/Orders/edit/{{r.0}}/items'">Items</button></td>
+            <td class="rowBtn"><button class="btn btn-primary" type="submit" onclick="window.location='/Orders/edit/{{r.0}}'">Edit</button></td>
+            <td><button class="rowBtn, btn btn-danger" type="submit" onclick="window.location='/deleteOrder/{{r.0}}'">Delete</button></td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+</table>
+<br>
+
+<script>
+    var count = 1;
+    $("#addItemBtn").click(function (event) {
+        event.preventDefault();
+
+        $("#orderForm").append(addNewRow(count));
+        count++;
+    });
+
+    function addNewRow(count) {
+        var newrow =
+            '<div class="form-row">' +
+                '<div class="input-group">' +
+                    '<div class="col-md-10">' +
+                        '<select class="form-control" name="item_id_' + count + '" id="itemSelect">' +
+                            '<option selected value="">Select item</option>' +
+                            '{% for i in itemDD %}' +
+                            '<option value="{{i.0}}">{{i.1}}, {{i.2}}</option>' +
+                            '{% endfor %}' +
+                        '</select>' +
+                    '</div>' +
+                    '<div class="col-md-2">' +
+                        '<input type="number" class="form-control" name="quantity_' + count + '" value="1" min="0" id="quantityInput">' +
+                    '</div>' +
+                '</div>' +
+            '</div>';
+        return newrow;
+    }
+</script>
+{% endblock %}

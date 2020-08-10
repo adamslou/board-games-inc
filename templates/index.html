@@ -1,0 +1,23 @@
+﻿{% extends "menu.html" %}
+{% block content %}
+    <div class="index">
+        <img class="logo" src="static/BGILogo.png" width="500" height="500"></img>
+        <h2>Inventory Management System</h2>
+        <br>
+        <dl class="row">
+            <dt class="col-sm-2">Items</dt>
+            <dd class="col-sm-10">This page allows the user to INSERT new rows into Items, UPDATE Items, and DELETE Items.</dd>
+            <dt class="col-sm-2">Orders</dt>
+            <dd class="col-sm-10">
+                This page allows the user to INSERT new rows into Orders and simultaneously INSERT rows into
+                Order_Items.  Also, the user can UPDATE Orders and Order_Items which are related to that order.
+                Lastly, the user can DELETE Orders which would also DELETE the Order_Items that are related to that
+                order.
+            </dd>
+            <dt class="col-sm-2">Customers</dt>
+            <dd class="col-sm-10">This page allows the user to INSERT new rows into Customers, UPDATE Customers, and DELETE Customers.</dd>
+            <dt class="col-sm-2">Employees</dt>
+            <dd class="col-sm-10">This page allows the user to INSERT new rows into Employees, UPDATE Employees, and DELETE Employees.</dd>
+        </dl>
+    </div>
+{% endblock %}

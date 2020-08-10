@@ -1,0 +1,52 @@
+﻿{% extends "menu.html" %}
+{% block content %}
+<script>
+$(document).ready(function() {
+    $('#empTable').DataTable();
+} );
+    </script>
+<div class="employees">
+    <h1>Employee Management</h1>
+</div>
+<form id="add-employee" action="/Employees" method="POST">
+    <div class="form-row">
+        <div class="col mb-3">
+            <label for="validationDefault01">First name</label>
+            <input type="text" name="first_name" class="form-control" id="validationDefault01" placeholder="Mark" required>
+        </div>
+        <div class="col mb-3">
+            <label for="validationDefault02">Last name</label>
+            <input type="text" name="last_name"class="form-control" id="validationDefault02" placeholder="Otto" required>
+        </div>
+    </div>
+    <button class="btn btn-success" type="submit">Add employee</button>
+
+</form>
+<table id="empTable" class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Employee id</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            <td>{{r.0}}</td>
+            <td>{{r[1]}}</td>
+            <td>{{r[2]}}</td>
+            <td class="rowBtn"><button class="btn btn-primary" type="submit" onclick="window.location='/Employees/edit/{{r.0}}'">Edit</button></td>
+            <td><button class="rowBtn, btn btn-danger" type="submit" onclick="window.location='/deleteEmp/{{r.0}}'">Delete</button></td>
+
+        </tr>
+        {% endfor %}
+
+       
+    </tbody>
+</table>
+<br>
+
+{% endblock %}

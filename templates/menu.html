@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Board Game Inc.</title>
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.bundle.min.js') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+</head>
+
+<!--Message flashing loop for errors-->
+    {% with messages = get_flashed_messages() %}
+        {%if messages %}
+            {% for message in messages %}
+            <script>alert("{{message}}");</script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<body>
+
+
+    <header>
+        <div class="container">
+            <a href="{{ url_for('index') }}"><h1 class="logo"> Board Games Inc</h1></a>
+            <ul class="menu">
+                <li><a href="{{ url_for('Items') }}"> Items</a></li>
+                <li><a href="{{ url_for('Orders') }}"> Orders</a></li>
+                <li><a href="{{ url_for('Customers') }}">Customers</a></li>
+                <li><a href="{{ url_for('Employees') }}">Employees</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

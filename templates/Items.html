@@ -1,0 +1,64 @@
+﻿{% extends "menu.html" %}
+{% block content %}
+<script>
+$(document).ready(function() {
+    $('#itemTable').DataTable();
+} );
+</script>
+<div class="items">
+    <h1>Item Management</h1>
+</div>
+<form id="add-item" action="/Items" method="POST">
+    <div class="form-row">
+        <div class="col mb-3">
+            <label for="validationDefault03">Item name</label>
+            <input type="text" name="item_name" class="form-control" id="validationDefault03" placeholder="Monopoly" required>
+        </div>
+
+        <div class="col mb-3">
+            <label for="validationDefault02">Price</label>
+            <input type="number" name="price" class="form-control" id="validationDefault02" placeholder="10.00" step=".01" min="0.01" required>
+        </div>
+        <div class="col mb-3">
+            <label for="validationDefault03">Quantity available</label>
+            <input type="number" name="quantity_available" class="form-control" id="validationDefault03" placeholder="10" min="1" required>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="validationDefault04">Description</label>
+            <input type="text" name="description" class="form-control" id="validationDefault04" placeholder="This is a game where you accumulate properties until you have total dominance." required>
+        </div>
+    </div>
+    <button class="btn btn-success" type="submit">Add item</button>
+</form>
+<table id="itemTable" class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Item id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity available</th>
+            <th scope="col">Description</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rows %}
+        <tr>
+            <td>{{r.0}}</td>
+            <td>{{r[2]}}</td>
+            <td>{{r[1]}}</td>
+            <td>{{r[4]}}</td>
+            <td>{{r[3]}}</td>
+            <td class="rowBtn"><button class="btn btn-primary" type="submit" onclick="window.location='/Items/edit/{{r.0}}'">Edit</button></td>
+            <td><button class="rowBtn, btn btn-danger" type="submit" onclick="window.location='/deleteItem/{{r.0}}'">Delete</button></td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+<br>
+
+{% endblock %}
