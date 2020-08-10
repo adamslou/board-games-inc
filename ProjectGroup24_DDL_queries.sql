@@ -106,8 +106,8 @@ INSERT INTO `Items` (`item_id`, `price`, `item_name`, `description`, `quantity_a
 DROP TABLE IF EXISTS `Orders`;
 CREATE TABLE `Orders` (
   `order_id` int(6) NOT NULL,
-  `cust_id` int(6), DcustomersEFAULT NULL
-  `emp_id` int(6), DEFAULT NULL
+  `cust_id` int(6) DEFAULT NULL,
+  `emp_id` int(6) DEFAULT NULL,
   `date` date NOT NULL,
   `total` decimal(6,2),
   `credit_card_num` bigint(16) NOT NULL,
