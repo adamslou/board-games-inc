@@ -5,8 +5,12 @@
 # in turn by all the Python code in this codebase to interact with the database
 
 host = 'us-cdbr-east-02.cleardb.com'  #DON'T CHANGE ME UNLESS THE INSTRUCTIONS SAY SO
-user = 'bdb7fd1889dbf0' #CHANGE ME
-passwd = 'ba130f36' #CHANGE ME
-db = 'heroku_c981bd63a71b60c' #CHANGE ME
+user = 'b062ec985cb84f' #CHANGE ME
+passwd = '32da5e42' #CHANGE ME
+db = 'heroku_11a29a79a72c19e' #CHANGE ME
 
+# old
 # mysql://bdb7fd1889dbf0:ba130f36@us-cdbr-east-02.cleardb.com/heroku_c981bd63a71b60c?reconnect=true
+
+# new for board-games-inc
+# mysql://b062ec985cb84f:32da5e42@us-cdbr-east-02.cleardb.com/heroku_11a29a79a72c19e?reconnect=true
